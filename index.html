@@ -1,225 +1,98 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Quick Start — Подключение к программе</title>
-  <meta name="description" content="Пошаговый туториал: регистрация, ввод промокода, отправка скриншота и получение доступа." />
-  <style>
-    :root{
-      --bg:#0b2030; --card:#0f2a3f; --accent:#00b48c; --muted:#bfcad0; --text:#eef6f9;
-      --radius:12px;
-      font-family: Inter, Arial, Helvetica, sans-serif;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0; background:linear-gradient(180deg,#071425 0%,#0b2030 100%);
-      color:var(--text); -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale; padding:32px;
-      line-height:1.45;
-    }
-    .container{max-width:940px;margin:0 auto;}
-    header{display:flex;align-items:center;gap:16px;margin-bottom:20px}
-    .logo{width:64px;height:64px;border-radius:12px;background:var(--accent);display:flex;align-items:center;justify-content:center;color:#062022;font-weight:700;font-size:20px}
-    h1{font-size:26px;margin:0}
-    p.lead{margin:6px 0 18px;color:var(--muted)}
-    .grid{display:grid;grid-template-columns:1fr 360px;gap:20px}
-    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:18px;border-radius:var(--radius); border:1px solid rgba(255,255,255,0.03)}
-    .steps{display:flex;flex-direction:column;gap:14px}
-    .step{display:flex;gap:12px;align-items:flex-start}
-    .step .num{width:44px;height:44px;border-radius:10px;background:rgba(255,255,255,0.04);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent)}
-    .step h3{margin:0;font-size:16px}
-    .step p{margin:4px 0 0;color:var(--muted);font-size:14px}
-    .aside{position:sticky;top:32px}
-    label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
-    input[type="text"], input[type="file"] , button{
-      width:100%; padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);
-      background:transparent;color:var(--text);font-size:15px;
-    }
-    input[type="text"]::placeholder{color:rgba(255,255,255,0.35)}
-    .small{font-size:13px;color:var(--muted)}
-    .row{display:flex;gap:12px}
-    .hint{font-size:13px;color:var(--muted);margin-top:8px}
-    .btn{background:var(--accent);border:none;color:#062022;font-weight:700;padding:12px;border-radius:10px;cursor:pointer}
-    .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--text);font-weight:600}
-    .preview{margin-top:10px;border-radius:8px;overflow:hidden;max-height:180px}
-    .note{font-size:13px;color:var(--muted);margin-top:12px}
-    .error{color:#ffb4a2}
-    footer{margin-top:18px;font-size:13px;color:var(--muted)}
-    @media (max-width:900px){ .grid{grid-template-columns:1fr; } .aside{position:static} }
-    /* focus for accessibility */
-    input:focus, button:focus { outline:3px solid rgba(0,180,140,0.18); outline-offset:2px; }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Как подключиться — быстрые шаги</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<style>
+:root{ --bg:#0b1220; --panel:#0f172a; --muted:#94a3b8; --line:rgba(255,255,255,.06) }
+body{ background:radial-gradient(1000px 600px at 10% -10%, rgba(59,130,246,.12), transparent), var(--bg); color:#e5f0ff }
+.card{ background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border:1px solid var(--line); border-radius:16px }
+.btn{ background:#10b981; color:#032a1f; font-weight:600; border-radius:10px; padding:.8rem 1.2rem }
+.badge{ background:#0b1c34; color:#a8c1ff; padding:.25rem .6rem; border-radius:999px; font-size:.75rem; border:1px solid var(--line) }
+ol.steps{ counter-reset: step; }
+ol.steps li{ counter-increment: step; padding-left:3rem; position:relative }
+ol.steps li::before{
+  content: counter(step);
+  position:absolute; left:.5rem; top:.25rem;
+  width:1.8rem; height:1.8rem; display:grid; place-items:center;
+  background:#0b1c34; border:1px solid var(--line); border-radius:999px; color:#a8c1ff; font-weight:700
+}
+</style>
 </head>
-<body>
-  <div class="container" role="main">
-    <header>
-      <div class="logo" aria-hidden="true">Go</div>
-      <div>
-        <h1>Как подключиться — быстрые шаги</h1>
-        <p class="lead">Следуйте этим четырём простым шагам. После проверки мы выдадим доступ к программе. Обратите внимание: результаты не гарантированы.</p>
-      </div>
-    </header>
-
-    <div class="grid">
-      <section class="card" aria-labelledby="stepsTitle">
-        <h2 id="stepsTitle" style="font-size:18px;margin:0 0 12px">Шаги подключения</h2>
-
-        <div class="steps" aria-hidden="false">
-          <div class="step" id="s1">
-            <div class="num" aria-hidden="true">1</div>
-            <div>
-              <h3>Регистрация по ссылке</h3>
-              <p>Перейдите по форме регистрации и заполните её корректно. Для удобства кнопка ниже открывает форму в новом окне.</p>
-              <p class="hint"><a href="https://kzgnss.github.io/SecretSignal-NP/" target="_blank" rel="noopener noreferrer" class="btn secondary" aria-label="Открыть форму регистрации">Открыть форму регистрации</a></p>
-            </div>
-          </div>
-
-          <div class="step" id="s2">
-            <div class="num">2</div>
-            <div>
-              <h3>Ввод промокода</h3>
-              <p>При регистрации в поле «Promo / Code» укажите промокод <strong>NP61</strong>.</p>
-            </div>
-          </div>
-
-          <div class="step" id="s3">
-            <div class="num">3</div>
-            <div>
-              <h3>Проверьте ID аккаунта</h3>
-              <p>После регистрации убедитесь, что ваш Account ID начинается с <strong>139</strong>. Это обязательно для проверки.</p>
-            </div>
-          </div>
-
-          <div class="step" id="s4">
-            <div class="num">4</div>
-            <div>
-              <h3>Снимите скриншот и отправьте</h3>
-              <p>Сделайте скриншот страницы профиля, где видно ваш Account ID, и загрузите ниже.</p>
-            </div>
-          </div>
-
-          <div class="step" id="s5">
-            <div class="num">5</div>
-            <div>
-              <h3>Ожидайте подтверждение</h3>
-              <p>Мы проверим данные и свяжемся с вами. После подтверждения вы получите доступ/бонус (в зависимости от правил программы).</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="note" role="note">
-          <strong>Важно:</strong> Мы не гарантируем доходы. Всегда сохраняйте копии своих данных и не передавайте секретные пароли.
-        </div>
-      </section>
-
-      <aside class="card aside" aria-label="Форма отправки">
-        <h2 style="margin-top:0;font-size:18px">Форма: отправить данные</h2>
-
-        <form id="onboardForm" aria-describedby="formDesc" novalidate>
-          <p id="formDesc" class="small">Заполните форму ниже — мы проверим и свяжемся с вами. Поля обязательны.</p>
-
-          <label for="fullname">Ваше имя</label>
-          <input id="fullname" name="fullname" type="text" placeholder="Имя и фамилия" required aria-required="true" />
-
-          <label for="acctId">Account ID (должен начинаться с 139)</label>
-          <input id="acctId" name="acctId" type="text" placeholder="Например 139XXXXXXX" required aria-required="true" />
-
-          <label for="promo">Промокод</label>
-          <input id="promo" name="promo" type="text" placeholder="NP61" value="NP61" required aria-required="true" />
-
-          <label for="screenshot">Загрузите скрин с ID</label>
-          <input id="screenshot" name="screenshot" type="file" accept="image/*" aria-describedby="uploadHint" required />
-          <div id="uploadHint" class="small">Разрешены JPG/PNG. Максимум 8 MB.</div>
-
-          <div id="preview" class="preview" aria-live="polite" style="display:none"></div>
-
-          <div style="margin-top:12px" id="errorBox" role="alert" aria-live="assertive"></div>
-
-          <div class="row" style="margin-top:12px">
-            <button type="button" id="checkBtn" class="btn">Проверить и отправить</button>
-            <button type="button" id="helpBtn" class="btn secondary">Нужна помощь?</button>
-          </div>
-
-          <div class="hint" id="successMsg" style="display:none;color:var(--accent);font-weight:700"></div>
-        </form>
-
-        <div class="note" style="margin-top:14px">
-          Контакт: <a href="mailto:support@example.com" style="color:var(--muted)">support@example.com</a><br/>
-          Безопасность: никогда не отправляйте пароли.
-        </div>
-      </aside>
+<body class="min-h-screen">
+<header class="py-10">
+  <div class="max-w-5xl mx-auto px-4">
+    <div class="inline-flex items-center gap-3">
+      <span class="grid place-items-center w-9 h-9 rounded-full bg-emerald-500 text-slate-900 font-bold">Go</span>
+      <h1 class="text-2xl sm:text-3xl font-semibold">Как подключиться — быстрые шаги</h1>
     </div>
+    <p class="text-sm text-[color:var(--muted)] mt-2">Следуйте этим шагам. После проверки вы получите доступ к программе. Результаты не гарантируются.</p>
+  </div>
+</header>
 
-    <footer class="card" style="margin-top:18px">
-      <div class="small">© <span id="year"></span> Подключение к программе — инструкция. Мы не обещаем конкретных доходов и не просим пароли. Бонус/доступ выдаётся после ручной проверки.</div>
-    </footer>
+<main class="max-w-5xl mx-auto px-4 pb-16">
+  <div class="grid lg:grid-cols-2 gap-6">
+    <!-- Левая колонка: только инструкция -->
+    <section class="card p-6">
+      <h2 class="text-lg font-semibold mb-4">Шаги подключения</h2>
+      <ol class="steps space-y-4">
+        <li>
+          <div class="font-medium">Регистрация по ссылке</div>
+          <p class="text-sm text-[color:var(--muted)]">Перейдите по кнопке ниже и корректно заполните форму регистрации. Кнопка откроется в новом окне.</p>
+          <p class="mt-2">
+            <a href="https://example.com/registration" target="_blank" rel="noopener"
+               class="text-emerald-300 underline underline-offset-4 hover:text-emerald-200">Открыть форму регистрации</a>
+          </p>
+        </li>
+        <li>
+          <div class="font-medium">Ввод промокода</div>
+          <p class="text-sm text-[color:var(--muted)]">При регистрации в поле «Promo / Code» укажите промокод <span class="badge">NP61</span>.</p>
+        </li>
+        <li>
+          <div class="font-medium">Проверьте ID аккаунта</div>
+          <p class="text-sm text-[color:var(--muted)]">Убедитесь, что ваш Account ID начинается с 139 — это важно для последующей проверки.</p>
+        </li>
+        <li>
+          <div class="font-medium">Сделайте скриншот</div>
+          <p class="text-sm text-[color:var(--muted)]">Сохраните скриншот профиля, где виден ваш Account ID. Храните его до запроса поддержки.</p>
+        </li>
+        <li>
+          <div class="font-medium">Ожидайте подтверждение</div>
+          <p class="text-sm text-[color:var(--muted)]">После проверки мы свяжемся с вами и предоставим доступ/бонус согласно правилам программы.</p>
+        </li>
+      </ol>
+
+      <div class="mt-6 flex items-center gap-3">
+        <a href="https://example.com/registration" target="_blank" rel="noopener" class="btn">Открыть регистрацию</a>
+        <a href="mailto:support@example.com" class="badge hover:brightness-125">Нужна помощь?</a>
+      </div>
+
+      <p class="text-xs text-[color:var(--muted)] mt-6">
+        Важно: мы не гарантируем доходы. Никогда не передавайте пароли и секретные коды третьим лицам.
+      </p>
+    </section>
+
+    <!-- Правая колонка: информативный блок вместо формы -->
+    <aside class="card p-6">
+      <h3 class="text-lg font-semibold mb-3">Что дальше?</h3>
+      <ul class="space-y-3 text-sm text-[color:var(--muted)]">
+        <li>• Проверка данных выполняется вручную (обычно в течение 24–48 часов).</li>
+        <li>• Если запросят подтверждение — отправьте скриншот с ID и дату регистрации.</li>
+        <li>• Все уведомления приходят на e-mail, указанный при регистрации.</li>
+      </ul>
+
+      <div class="mt-5 p-4 rounded-lg border border-[color:var(--line)] bg-[color:var(--panel)]">
+        <div class="text-sm">Контакты: <a class="underline text-emerald-300" href="mailto:support@example.com">support@example.com</a></div>
+        <div class="text-xs mt-2 opacity-80">Безопасность: не делитесь паролями и кодами доступа. Мы не просим конфиденциальные данные в мессенджерах.</div>
+      </div>
+    </aside>
   </div>
 
-  <script>
-    // Accessibility: set year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    const acctInput = document.getElementById('acctId');
-    const promoInput = document.getElementById('promo');
-    const fileInput = document.getElementById('screenshot');
-    const checkBtn = document.getElementById('checkBtn');
-    const helpBtn = document.getElementById('helpBtn');
-    const preview = document.getElementById('preview');
-    const errorBox = document.getElementById('errorBox');
-    const successMsg = document.getElementById('successMsg');
-
-    // preview uploaded image
-    fileInput.addEventListener('change', function(){
-      errorBox.textContent = '';
-      preview.style.display = 'none';
-      preview.innerHTML = '';
-      const f = fileInput.files[0];
-      if(!f) return;
-      if(f.size > 8*1024*1024){ errorBox.innerHTML = '<span class="error">Файл слишком большой (макс 8MB).</span>'; fileInput.value=''; return; }
-      const img = document.createElement('img');
-      img.style.width = '100%';
-      img.alt = 'Превью загруженного скриншота';
-      preview.appendChild(img);
-      const reader = new FileReader();
-      reader.onload = function(e){ img.src = e.target.result; preview.style.display = 'block'; }
-      reader.readAsDataURL(f);
-    });
-
-    // validation and fake submit (simulate server)
-    checkBtn.addEventListener('click', function(){
-      errorBox.textContent = '';
-      successMsg.style.display = 'none';
-      const name = document.getElementById('fullname').value.trim();
-      const acct = acctInput.value.trim();
-      const promo = promoInput.value.trim().toUpperCase();
-      const f = fileInput.files[0];
-
-      if(!name){ errorBox.innerHTML = '<span class="error">Введите ваше имя.</span>'; return; }
-      if(!acct){ errorBox.innerHTML = '<span class="error">Введите ваш Account ID.</span>'; return; }
-      if(!acct.startsWith('139')){ errorBox.innerHTML = '<span class="error">Account ID должен начинаться с 139.</span>'; return; }
-      if(!promo){ errorBox.innerHTML = '<span class="error">Промокод обязателен.</span>'; return; }
-      if(promo !== 'NP61'){ errorBox.innerHTML = '<span class="error">Неверный промокод. Проверьте и введите NP61.</span>'; return; }
-      if(!f){ errorBox.innerHTML = '<span class="error">Загрузите скриншот с вашим ID.</span>'; return; }
-      // simulate upload & response
-      checkBtn.disabled = true;
-      checkBtn.textContent = 'Отправка...';
-      setTimeout(function(){
-        checkBtn.disabled = false;
-        checkBtn.textContent = 'Проверить и отправить';
-        successMsg.style.display = 'block';
-        successMsg.textContent = 'Данные отправлены. Мы проверим и свяжемся с вами в течение 24 часов.';
-        // clear sensitive inputs if you want:
-        // fileInput.value = '';
-      }, 1100);
-    });
-
-    helpBtn.addEventListener('click', function(){
-      alert('Если нужна помощь с регистрацией или скриншотом — напишите на support@example.com (работаем 09:00–21:00).');
-    });
-
-    // basic keyboard accessibility: focus first input on load
-    window.addEventListener('load', function(){ document.getElementById('fullname').focus(); });
-  </script>
+  <footer class="text-xs text-[color:var(--muted)] mt-10">
+    © 2025 Инструкция по подключению. Доступ предоставляется после ручной проверки. Условия могут меняться.
+  </footer>
+</main>
 </body>
 </html>
